@@ -266,20 +266,30 @@ npm --prefix server test
 
 ## 🚢 Production Deployment Guide
 
-### Frontend (e.g. Vercel, Netlify, Cloudflare Pages)
-1. Set the build command to `npm run build` and output directory to `dist`.
-2. Configure environment variable:
-   - `VITE_API_URL`: URL of your deployed backend (e.g., `https://api.technova.com/api`).
+## 🚢 Production Deployment Guide (Render)
 
-### Backend (e.g. Render, Railway, DigitalOcean, AWS EC2)
-1. Set the start command to `node src/server.js`.
-2. Configure environment variables:
-   - `PORT`: `5000` (or host-provided port).
-   - `NODE_ENV`: `production`.
-   - `MONGODB_URI`: Production MongoDB Atlas connection string.
-   - `JWT_SECRET`: High-entropy 64-character secret key.
-   - `CLIENT_URL`: Deployed frontend domain URL.
-3. Run `npm run seed` once to populate initial categories and admin account.
+This repository includes a preconfigured `render.yaml` blueprint for one-click deployment on [Render](https://render.com).
+
+### ⚡ Quick Deploy on Render (Single Full-Stack Web Service)
+The application is pre-configured to build both the client and server together and serve everything from a single Render Web Service (Free Tier compatible):
+
+1. **Push to GitHub**: Ensure the repository is published under `https://github.com/Mrphysico/E-commerce-website`.
+2. **Open Render**: Go to [Render Dashboard](https://dashboard.render.com).
+3. **New Web Service**:
+   - Click **"New +"** &rarr; **"Web Service"**.
+   - Select your GitHub repo: `Mrphysico/E-commerce-website`.
+4. **Settings**:
+   - **Environment**: `Node`
+   - **Build Command**: `npm run build`
+   - **Start Command**: `npm start`
+   - **Plan**: `Free`
+5. **Environment Variables**:
+   - `NODE_ENV`: `production`
+   - `PORT`: `10000` (Render default)
+   - `JWT_SECRET`: Any random 32+ character string (or auto-generated)
+   - `MONGODB_URI`: *(Optional)* Your MongoDB Atlas connection URI (if omitted, the app automatically runs in fast demo in-memory mode with full seed data!).
+6. **Click "Deploy Web Service"**!
+   - Your full-stack e-commerce site will be live at `https://<your-service-name>.onrender.com`.
 
 ---
 
